@@ -56,12 +56,10 @@ async function deliverStep(ctx, step, lesson, user) {
 }
 
 async function deliverVideoStep(ctx, step) {
-  const videoText = step.videoUrl.startsWith('PLACEHOLDER')
-    ? `${step.text}\n\n🔗 Ссылка на видео: _(скоро будет добавлена)_`
-    : `${step.text}\n\n🔗 [Смотреть видео](${step.videoUrl})`
-
-  await safeReply(ctx, videoText, {
+  await ctx.replyWithVideo(step.videoUrl, {
+    caption: step.text,
     parse_mode: 'Markdown',
+    protect_content: true,
     ...Markup.inlineKeyboard([[Markup.button.callback(step.confirmButtonText, 'confirm_step')]]),
   })
 }

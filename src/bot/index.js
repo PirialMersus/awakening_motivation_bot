@@ -1,5 +1,5 @@
 import { Telegraf } from 'telegraf'
-import { findOrCreateUser, getUserByTelegramId, setUserName, updateUserActivity } from '../services/userService.js'
+import { findOrCreateUser, getUserByTelegramId, updateUserActivity } from '../services/userService.js'
 import { sendCurrentStep, handleConfirmStep, handleChoiceStep, handleTextSubmission, handlePhotoSubmission } from './handlers/stepHandler.js'
 import { LESSONS } from '../content/lessons.js'
 
@@ -15,7 +15,7 @@ export function createBot() {
 
     const welcomeMessage = `🔥 *ПРОБУЖДЕНИЕ*
 
-Ты здесь не случайно.
+Привет, ${first_name}! Ты здесь не случайно.
 
 Большинство людей живут по инерции — просыпаются, идут по привычному маршруту, засыпают. И завтра всё повторяется.
 
@@ -33,11 +33,10 @@ export function createBot() {
 
 Это будет непросто. Именно так работает рост.
 
-Как тебя зовут?`
+Запомни этот момент. Это точка отсчёта. Поехали 🔥`
 
     await safeReply(ctx, welcomeMessage, { parse_mode: 'Markdown' })
-    await findOrCreateUser(id, username, first_name)
-    await setUserNameAwaiting(id)
+    await initUserAndStartLesson(ctx, id, username, first_name)
   })
 
   bot.command('progress', async (ctx) => {
@@ -97,17 +96,6 @@ export function createBot() {
       return
     }
 
-    if (user.awaitingName) {
-      const name = ctx.message.text.trim()
-      await setUserName(user.telegramId, name)
-      await safeReply(ctx, 
-        `Привет, ${name}! 👋\n\nЗапомни этот момент. Это точка отсчёта.\n\nЧерез несколько месяцев ты вернёшься к этому дню и не узнаешь себя — в хорошем смысле.\n\nУрок 1 уже ждёт тебя. Поехали 🔥`,
-        { parse_mode: 'Markdown' }
-      )
-      await sendCurrentStep(ctx, user)
-      return
-    }
-
     await handleTextSubmission(ctx, user, ctx.message.text)
   })
 
@@ -149,7 +137,13 @@ export function createBot() {
   return bot
 }
 
-async function setUserNameAwaiting(telegramId) {
+async function initUserAndStartLesson(ctx, telegramId, username, firstName) {
   const { UserModel } = await import('../db/models/User.js')
-  await UserModel.updateOne({ telegramId }, { awaitingName: true, currentLesson: 1, currentStep: 0 })
+  await UserModel.updateOne(
+    { telegramId },
+    { awaitingName: false, currentLesson: 1, currentStep: 0 },
+    { upsert: true }
+  )
+  const user = await getUserByTelegramId(telegramId)
+  await sendCurrentStep(ctx, user)
 }
