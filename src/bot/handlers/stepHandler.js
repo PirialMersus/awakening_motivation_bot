@@ -173,7 +173,8 @@ export async function handleTextSubmission(ctx, user, text) {
 
     await saveSubmission(user.telegramId, lesson.number, user.currentStep, 'essay', text, null, geminiResponse, approved)
 
-    await safeReply(ctx, `💬 *Разбор задания:*\n\n${geminiResponse}`, { parse_mode: 'Markdown' })
+    await safeReply(ctx, '💬 *Разбор задания:*', { parse_mode: 'Markdown' })
+    await safeReply(ctx, geminiResponse)
 
     if (approved) {
       await moveToNextStep(ctx, user, lesson)
@@ -204,7 +205,8 @@ export async function handlePhotoSubmission(ctx, user, photoFileId, photoBase64,
 
     await saveSubmission(user.telegramId, lesson.number, user.currentStep, 'photo', null, photoFileId, geminiResponse, approved)
 
-    await safeReply(ctx, `💬 *Разбор:*\n\n${geminiResponse}`, { parse_mode: 'Markdown' })
+    await safeReply(ctx, '💬 *Разбор:*', { parse_mode: 'Markdown' })
+    await safeReply(ctx, geminiResponse)
 
     if (approved) {
       await moveToNextStep(ctx, user, lesson)
