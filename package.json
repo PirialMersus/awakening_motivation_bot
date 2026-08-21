@@ -1,0 +1,19 @@
+{
+  "name": "self-motivation-bot",
+  "version": "1.0.0",
+  "description": "Telegram бот тренинга ПРОБУЖДЕНИЕ",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "dependencies": {
+    "telegraf": "^4.16.3",
+    "mongoose": "^8.5.1",
+    "express": "^4.19.2",
+    "@google/generative-ai": "^0.17.1",
+    "dotenv": "^16.4.5",
+    "node-cron": "^3.0.3"
+  }
+}
