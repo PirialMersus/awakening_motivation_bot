@@ -111,6 +111,15 @@ export function createBot() {
     await handleTextSubmission(ctx, user, ctx.message.text)
   })
 
+  bot.on('video', async (ctx) => {
+    const video = ctx.message.video
+    await safeReply(
+      ctx,
+      `📹 *file_id видео:*\n\`${video.file_id}\`\n\nСкопируй и передай мне для вставки в урок.`,
+      { parse_mode: 'Markdown' }
+    )
+  })
+
   bot.on('photo', async (ctx) => {
     const user = await getUserByTelegramId(ctx.from.id)
     if (!user) {
