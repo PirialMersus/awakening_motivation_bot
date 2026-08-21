@@ -6,7 +6,7 @@ export const LESSONS = [
       {
         type: 'video',
         text: '🎬 *Урок 1 — Вступительные слова*\n\nПосмотри вводное видео тренинга.',
-        videoUrl: 'PLACEHOLDER_LESSON_1_VIDEO_URL',
+        videoUrl: 'BAACAgIAAxkBAAMGaohLf3sThvsz0n_0HxR1dbBX43oAAoKiAALK6TBIPyStsXhNf4k9BA',
         confirmButtonText: '✅ Посмотрел',
       },
     ],
@@ -19,7 +19,7 @@ export const LESSONS = [
       {
         type: 'video',
         text: '🎬 *Урок 2 — Правила тренинга*\n\nПосмотри видео о правилах, которые делают тренинг эффективным.',
-        videoUrl: 'PLACEHOLDER_LESSON_2_VIDEO_URL',
+        videoUrl: 'BAACAgIAAxkBAAMIaohLo91ayF2MhoSEpNMIrqxHIcMAAoWiAALK6TBI5pHH-SZeX5o9BA',
         confirmButtonText: '✅ Посмотрел',
       },
       {
@@ -51,7 +51,7 @@ export const LESSONS = [
       {
         type: 'video',
         text: '🎬 *Урок 3 — Контракт с собой*\n\nПосмотри видео о том, как написать контракт с самим собой.',
-        videoUrl: 'PLACEHOLDER_LESSON_3_VIDEO_URL',
+        videoUrl: 'BAACAgIAAxkBAAMKaohLuhC46MD5lefahVhvBnJtcFgAAqiiAALK6TBIZmf2Y2gqMko9BA',
         confirmButtonText: '✅ Посмотрел',
       },
       {
@@ -99,7 +99,7 @@ export const LESSONS = [
       {
         type: 'video',
         text: '🎬 *Урок 4 — Разминка*\n\nПосмотри видео с заданием на разминку.',
-        videoUrl: 'PLACEHOLDER_LESSON_4_VIDEO_URL',
+        videoUrl: 'BAACAgIAAxkBAAMMaohNGCinXeV-ae4UD-xN8RK2EtMAAqyiAALK6TBIK1kjg_nSWhs9BA',
         confirmButtonText: '✅ Посмотрел',
       },
       {
@@ -205,7 +205,7 @@ export const LESSONS = [
       {
         type: 'video',
         text: '🎬 *Урок 5 — Мотивация через кино*\n\nПосмотри видео с заданием.',
-        videoUrl: 'PLACEHOLDER_LESSON_5_VIDEO_URL',
+        videoUrl: 'BAACAgIAAxkBAAMOaohNQ1JhIxUR8cO8UDSnSPOIREgAAq6iAALK6TBIV4GuaYVQCm09BA',
         confirmButtonText: '✅ Посмотрел',
       },
       {
@@ -323,7 +323,7 @@ export const LESSONS = [
       {
         type: 'video',
         text: '🎬 *Урок 6 — Чистка*\n\nПосмотри видео о чистке информационного пространства.',
-        videoUrl: 'PLACEHOLDER_LESSON_6_VIDEO_URL',
+        videoUrl: 'BAACAgIAAxkBAAMQaohNWePuyGTOXMcRDOEroRJgGtoAArCiAALK6TBI7IOLOqtRxE09BA',
         confirmButtonText: '✅ Посмотрел',
       },
       {
@@ -402,7 +402,7 @@ export const LESSONS = [
       {
         type: 'video',
         text: '🎬 *Урок 7 — Обратная связь после разминки*\n\nПосмотри видео.',
-        videoUrl: 'PLACEHOLDER_LESSON_7_VIDEO_URL',
+        videoUrl: 'BAACAgIAAxkBAAMSaohNbFPtImt8BqpJtak42Vkmw7YAArGiAALK6TBIRdXBn1fOPg89BA',
         confirmButtonText: '✅ Посмотрел',
       },
       {
