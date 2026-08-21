@@ -3,6 +3,7 @@ import express from 'express'
 import { connectToDatabase } from './db/connection.js'
 import { createBot } from './bot/index.js'
 import { startReminderCron } from './services/reminderService.js'
+import { startPingCron } from './services/pingService.js'
 
 const PORT = process.env.PORT || 3000
 const WEBHOOK_URL = process.env.TELEGRAM_WEBHOOK_URL
@@ -12,6 +13,7 @@ async function startServer() {
 
   const bot = createBot()
   startReminderCron(bot)
+  startPingCron()
 
   const app = express()
   app.use(express.json())
