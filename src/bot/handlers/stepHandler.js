@@ -3,7 +3,7 @@ import { Markup } from 'telegraf'
 const safeReply = (ctx, text, extra = {}) =>
   ctx.reply(text, { protect_content: true, ...extra })
 import { SubmissionModel } from '../../db/models/Submission.js'
-import { checkEssayWithGemini, checkPhotoWithGemini, isApprovedByGemini } from '../../services/geminiService.js'
+import { checkEssayWithGemini, checkPhotoWithGemini, isApprovedByGemini, extractContractTextWithGemini } from '../../services/geminiService.js'
 import {
   getLessonByNumber,
   getCurrentStep,
@@ -18,6 +18,7 @@ import {
   updateUserActivity,
   setLesson5Track,
   setFoodDiaryStarted,
+  saveContractData,
 } from '../../services/userService.js'
 import { LESSONS } from '../../content/lessons.js'
 
@@ -209,10 +210,17 @@ export async function handlePhotoSubmission(ctx, user, photoFileId, photoBase64,
     await safeReply(ctx, geminiResponse)
 
     if (approved) {
+      if (step.isContract) {
+        const contractText = await extractContractTextWithGemini(photoBase64, mimeType)
+        await saveContractData(user.telegramId, photoFileId, contractText)
+      }
       await moveToNextStep(ctx, user, lesson)
     }
   } else {
     await saveSubmission(user.telegramId, lesson.number, user.currentStep, 'photo', null, photoFileId, null, true)
+    if (step.isContract) {
+      await saveContractData(user.telegramId, photoFileId, null)
+    }
     await moveToNextStep(ctx, user, lesson)
   }
 }

@@ -57,3 +57,28 @@ export function isApprovedByGemini(geminiResponse) {
   if (geminiResponse.startsWith('❌ DEV ERROR')) return false
   return geminiResponse.toUpperCase().includes('ПРИНЯТО')
 }
+
+export async function extractContractTextWithGemini(photoBase64, mimeType) {
+  const extractionPrompt = `На фото — рукописный контракт человека с самим собой. 
+Перепиши текст с фото максимально точно, сохраняя структуру и пункты.
+Если текст не читается — напиши: НЕ ЧИТАЕТСЯ.
+Только текст, никаких комментариев от себя.`
+
+  try {
+    const response = await withTimeout(
+      geminiClient.models.generateContent({
+        model: 'gemini-3.6-flash',
+        contents: [
+          { text: extractionPrompt },
+          { inlineData: { data: photoBase64, mimeType } },
+        ],
+      }),
+      GEMINI_TIMEOUT_MS
+    )
+    return response.text
+  } catch (geminiError) {
+    console.error('[GeminiService] ❌ Ошибка при распознавании текста контракта:')
+    console.error('  message:', geminiError.message)
+    return null
+  }
+}

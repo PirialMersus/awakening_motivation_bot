@@ -17,6 +17,8 @@ const userSchema = new mongoose.Schema({
   lesson5BonusEnabled: { type: Boolean, default: false },
   isActive: { type: Boolean, default: true },
   awaitingName: { type: Boolean, default: false },
+  contractPhotoFileId: { type: String, default: null },
+  contractText: { type: String, default: null },
 })
 
 export const UserModel = mongoose.model('User', userSchema)

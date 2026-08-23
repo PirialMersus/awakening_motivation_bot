@@ -26,6 +26,13 @@ export async function setUserName(telegramId, customName) {
   )
 }
 
+export async function saveContractData(telegramId, contractPhotoFileId, contractText) {
+  await UserModel.updateOne(
+    { telegramId },
+    { contractPhotoFileId, contractText }
+  )
+}
+
 export async function advanceUserStep(telegramId, nextLesson, nextStep) {
   await UserModel.updateOne(
     { telegramId },
