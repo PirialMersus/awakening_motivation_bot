@@ -30,7 +30,7 @@ async function sendRemindersAtLevel(bot, hoursThreshold, level) {
   const inactiveUsers = await getUsersWithInactivity(hoursThreshold)
   for (const user of inactiveUsers) {
     if (user.reminderLevel >= level) continue
-    const userName = user.customName || user.firstName || 'друг'
+    const userName = user.firstName || 'друг'
     const message = reminderMessages[level](userName)
     try {
       await bot.telegram.sendMessage(user.telegramId, message)

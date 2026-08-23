@@ -12,6 +12,14 @@ async function startServer() {
   await connectToDatabase()
 
   const bot = createBot()
+
+  bot.catch((botError, ctx) => {
+    console.error('[BOT ERROR] Необработанная ошибка:', botError)
+    if (ctx) {
+      ctx.reply('Произошла ошибка. Попробуй ещё раз или напиши /lesson').catch(() => {})
+    }
+  })
+
   startReminderCron(bot)
   startPingCron()
 
